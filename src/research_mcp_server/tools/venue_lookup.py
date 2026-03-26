@@ -91,13 +91,7 @@ def _get_venue_tier(venue_name: str) -> str:
 
 venue_lookup_tool = types.Tool(
     name="venue_lookup",
-    description="""Search the DBLP computer science bibliography for publications, authors, or venues (conferences/journals).
-
-Returns enriched results with venue tier info where possible. Use to find papers by topic, discover an author's publication list, or look up conference/journal details.
-
-Examples:
-  query="attention is all you need", type="publication" | query="Geoffrey Hinton", type="author" | query="NeurIPS", type="venue"
-""",
+    description="Search DBLP for CS conferences, journals, authors, and publication records.",
     inputSchema={
         "type": "object",
         "properties": {

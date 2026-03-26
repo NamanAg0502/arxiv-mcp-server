@@ -13,12 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 kg_query_tool = types.Tool(
     name="kg_query",
-    description=(
-        "Query the research knowledge graph. Find papers, concepts, methods, "
-        "datasets, and authors, and explore relationships between them. "
-        "Supports natural language queries, filtered searches, subgraph "
-        "exploration, and graph statistics."
-    ),
+    description="Query the research knowledge graph — find connections between papers, concepts, methods, and authors.",
     inputSchema={
         "type": "object",
         "properties": {

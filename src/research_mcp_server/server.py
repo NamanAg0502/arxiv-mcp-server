@@ -99,34 +99,43 @@ async def get_prompt(
     return await handler_get_prompt(name, arguments)
 
 
+# --- Progressive Disclosure ---
+# Tier 1: Always visible (~12 tools, ~3K tokens instead of ~8K)
+# These are the tools most likely to be needed in any session.
+_TIER1_TOOLS = [
+    search_tool, download_tool, read_tool,          # Core paper workflow
+    kb_tool, citations_tool,                         # Knowledge + citations
+    github_tool, hn_tool, reddit_tool,               # Top practitioner sources
+    tech_pulse_tool, evaluate_tool, deep_research_tool,  # CTO intelligence
+    suggest_tools_tool,                              # Meta: discover Tier 2
+]
+
+# Tier 2: Discoverable via `help` tool, but always callable
+_TIER2_TOOLS = [
+    semantic_search_tool, multi_search_tool,         # Advanced search
+    list_tool, read_paper_chunks_tool,               # Paper management
+    research_lineage_tool, compare_tool,             # Advanced analysis
+    trend_analysis_tool, digest_tool,
+    kg_query_tool, memory_tool,                      # Knowledge graph + memory
+    hf_trending_tool, pwc_search_tool,               # Academic sources
+    model_benchmarks_tool, venue_lookup_tool,
+    patent_search_tool, export_tool,
+    community_tool, packages_tool,                   # More practitioner sources
+    so_tool, web_tool, context7_tool,
+    sentiment_tool,                                  # Sentiment (usually via evaluate)
+]
+
+_ALL_TOOLS = _TIER1_TOOLS + _TIER2_TOOLS
+
+
 @server.list_tools()
 async def list_tools() -> List[types.Tool]:
-    """List available research tools.
+    """List visible research tools (Tier 1).
 
-    Returns v2 tools (31 tools across academic, practitioner, and intelligence layers).
-    Old tool names are still routable via backwards-compat aliases in _TOOL_HANDLERS.
+    Returns ~12 core tools to minimize token overhead (~3K tokens vs ~8K for all 34).
+    All 34 tools remain callable — Tier 2 tools are discoverable via the `help` tool.
     """
-    return [
-        # Search & Discovery
-        search_tool, semantic_search_tool, multi_search_tool,
-        # Paper Management
-        download_tool, list_tool, read_tool, read_paper_chunks_tool,
-        # Analysis
-        citations_tool, research_lineage_tool, compare_tool,
-        trend_analysis_tool, digest_tool,
-        # Knowledge & Memory
-        kb_tool, kg_query_tool, memory_tool,
-        # Academic Sources
-        hf_trending_tool, pwc_search_tool, model_benchmarks_tool,
-        venue_lookup_tool, patent_search_tool, export_tool,
-        # Practitioner Sources
-        hn_tool, community_tool, packages_tool,
-        github_tool, reddit_tool, so_tool, web_tool, context7_tool,
-        # CTO Intelligence
-        tech_pulse_tool, evaluate_tool, sentiment_tool, deep_research_tool,
-        # Meta
-        suggest_tools_tool,
-    ]
+    return _TIER1_TOOLS
 
 
 # --- Primary handlers (v2 tool names) ---
@@ -369,9 +378,10 @@ async def call_tool(name: str, arguments: Dict[str, Any]) -> List[types.TextCont
 
 async def main():
     """Run the server async context."""
-    # Register all tools for semantic discovery
-    all_tools = await list_tools()
-    register_all_tools(all_tools)
+    # Register ALL tools (Tier 1 + Tier 2) for semantic discovery via `help`
+    # This ensures the `help` tool can recommend Tier 2 tools even though
+    # they're not in list_tools() (progressive disclosure)
+    register_all_tools(_ALL_TOOLS)
 
     async with stdio_server() as streams:
         await server.run(

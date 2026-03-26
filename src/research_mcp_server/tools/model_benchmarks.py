@@ -13,16 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 model_benchmarks_tool = types.Tool(
     name="model_benchmarks",
-    description="""Search and compare AI model benchmarks using Epoch AI's public dataset of notable AI models and benchmark runs.
-
-Actions:
-- "search_models": Search Epoch's catalog of notable AI models by name, organization, or domain.
-- "compare": Side-by-side benchmark comparison of specific models (provide model_names).
-- "benchmarks": Search benchmark results, optionally filtered by model or benchmark name.
-
-Examples:
-  action="search_models", query="GPT" | action="compare", model_names=["GPT-4", "Claude 3"] | action="benchmarks", benchmark="MMLU"
-""",
+    description="Compare AI model capabilities using Epoch AI data — parameters, training compute, and benchmarks.",
     inputSchema={
         "type": "object",
         "properties": {

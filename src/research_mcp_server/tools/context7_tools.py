@@ -12,14 +12,7 @@ logger = logging.getLogger("research-mcp-server")
 
 context7_tool = types.Tool(
     name="docs",
-    description=(
-        "Get up-to-date documentation and code examples for any library or framework "
-        "via Context7. Useful when evaluating tools or needing current API references.\n"
-        "Actions:\n"
-        "- 'resolve': Find a library by name and get its Context7 ID.\n"
-        "- 'query': Get documentation snippets for a specific question.\n"
-        "- 'lookup': Resolve + query in one step (convenience)."
-    ),
+    description="Get live library documentation and code examples via Context7. Actions: resolve, query, lookup.",
     inputSchema={
         "type": "object",
         "required": ["action"],

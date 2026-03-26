@@ -57,14 +57,7 @@ Examples: paper_id="2401.12345", direction="citations" | paper_id="1706.03762", 
 
 citations_tool = types.Tool(
     name="citations",
-    description="""Get citations and references for a paper, optionally with structural analysis. Combines raw citation fetching with landscape analysis.
-
-Without analyze=true: returns citation/reference lists (fast, fewer API calls).
-With analyze=true: adds foundational papers, bridge papers, citation clusters, temporal impact, and velocity (slower, many API calls).
-
-Supports depth=2 for recursive traversal. Omit arXiv version suffix from IDs.
-
-Examples: paper_id="2401.12345" | paper_id="1706.03762", analyze=true | paper_id="2401.12345", direction="citations", depth=2""",
+    description="Get citations and references for a paper. Add analyze=true for structural analysis (foundational papers, clusters, velocity).",
     inputSchema={
         "type": "object",
         "properties": {

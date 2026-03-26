@@ -12,15 +12,7 @@ logger = logging.getLogger("research-mcp-server")
 
 so_tool = types.Tool(
     name="stackoverflow",
-    description=(
-        "Search Stack Overflow questions and check tag popularity. "
-        "Tag question counts are a proxy for technology adoption. "
-        "Optional STACKOVERFLOW_KEY env var for higher rate limits.\n"
-        "Actions:\n"
-        "- 'search': Search questions by keyword, optionally filtered by tag.\n"
-        "- 'tags': Get question counts for tags (adoption signal). E.g., tags=['fastapi','flask','django'].\n"
-        "- 'trending': Get recent active questions, optionally by tag."
-    ),
+    description="Search Stack Overflow questions, check tag popularity, and find trending topics.",
     inputSchema={
         "type": "object",
         "required": ["action"],

@@ -256,13 +256,7 @@ async def _search_crossref(
 
 multi_search_tool = types.Tool(
     name="cross_search",
-    description="""Search across multiple academic sources (arXiv, OpenAlex, Crossref) in parallel. Returns deduplicated, merged results sorted by citation count and recency.
-
-Use this when you want broader coverage than a single source. OpenAlex provides citation counts and open access info. Crossref provides DOI metadata and reference lists. arXiv provides full-text preprints.
-
-Results are deduplicated by DOI and title similarity, with the richest metadata version kept.
-
-Examples: query="transformer architecture", sources=["arxiv", "openalex"] | query="CRISPR gene editing", sources=["openalex", "crossref"], date_from="2023-01-01" | query="large language models", max_results_per_source=15""",
+    description="Search across arXiv, OpenAlex, and Crossref in parallel with automatic deduplication.",
     inputSchema={
         "type": "object",
         "properties": {

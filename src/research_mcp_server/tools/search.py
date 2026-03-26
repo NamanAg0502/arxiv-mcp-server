@@ -230,22 +230,7 @@ def _parse_arxiv_atom_response(xml_text: str) -> List[Dict[str, Any]]:
 
 search_tool = types.Tool(
     name="search",
-    description=(
-        "Unified arXiv search — use for BOTH keyword/phrase queries AND structured "
-        "field-by-field searches. Replaces the old search_papers and arxiv_advanced_query tools.\n\n"
-        "Two modes:\n"
-        "1. Keyword search: provide `query` with free-text, quoted phrases, boolean operators "
-        "(AND, OR, ANDNOT), or field prefixes (ti:, au:, abs:, cat:).\n"
-        "2. Structured search: provide specific fields (`title`, `author`, `abstract`, "
-        "`all_fields`) for precise control over which fields match which terms.\n\n"
-        "Both modes support `categories`, `date_from`, `date_to`, `max_results`, and `sort_by`. "
-        "At least one search criterion is required. Max 50 results. Rate limited to 1 req/3s.\n\n"
-        "Examples:\n"
-        "  query='\"multi-agent systems\" ANDNOT survey', categories=[\"cs.MA\"]\n"
-        "  title=\"attention mechanism\", author=\"Vaswani\"\n"
-        "  query='ti:\"transformer\"', date_from='2023-01-01'\n"
-        "  abstract=\"protein folding\", categories=[\"q-bio.BM\"]"
-    ),
+    description="Search arXiv papers by keyword, phrase, or structured fields (title, author, abstract). Supports date filtering and categories.",
     inputSchema={
         "type": "object",
         "properties": {

@@ -37,11 +37,7 @@ SECTION_PATTERNS: Dict[str, List[str]] = {
 
 read_paper_chunks_tool = types.Tool(
     name="read_paper_chunks",
-    description=(
-        "Read a paper split into semantically coherent sections instead of raw text. "
-        "Returns structured JSON with classified sections (abstract, introduction, "
-        "methodology, results, etc.). Optionally filter to specific sections."
-    ),
+    description="Read a downloaded paper by structured sections (intro, methods, results, etc.).",
     inputSchema={
         "type": "object",
         "properties": {

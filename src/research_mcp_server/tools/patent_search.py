@@ -17,14 +17,7 @@ logger = logging.getLogger("research-mcp-server")
 
 patent_search_tool = types.Tool(
     name="patent_search",
-    description=(
-        "Search patents and scholarly works via Lens.org. Supports patent search "
-        "(by claim text), scholarly search (by title), or both. Optionally "
-        "cross-references results: for scholarly hits, finds citing patents; "
-        "for patent hits, identifies cited papers. Requires free LENS_API_TOKEN "
-        "(register at lens.org). Example: query='retrieval augmented generation', "
-        "search_type='both', cross_reference=true"
-    ),
+    description="Search patents and scholarly works via Lens.org. Cross-reference papers with patents.",
     inputSchema={
         "type": "object",
         "properties": {

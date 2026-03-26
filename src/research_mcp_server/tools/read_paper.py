@@ -10,7 +10,7 @@ settings = Settings()
 
 read_tool = types.Tool(
     name="read_paper",
-    description="Read the full markdown content of a downloaded paper. Prerequisite: the paper must already be downloaded via download_paper (use list_papers to check). Returns the complete paper text converted from PDF. Example: paper_id=\"2401.12345\"",
+    description="Read the full markdown content of a downloaded paper.",
     inputSchema={
         "type": "object",
         "properties": {

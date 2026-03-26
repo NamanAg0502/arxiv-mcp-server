@@ -12,13 +12,7 @@ logger = logging.getLogger("research-mcp-server")
 
 hn_tool = types.Tool(
     name="hn",
-    description=(
-        "Search and browse Hacker News for developer discussions, tech news, and community reactions. "
-        "Actions:\n"
-        "- 'search': Search HN stories or comments by keyword. Filter by time range.\n"
-        "- 'trending': Get current front page stories (what devs are discussing right now).\n"
-        "- 'discussion': Get a story's top comments (community reaction/sentiment)."
-    ),
+    description="Search and browse Hacker News — stories, comments, trending, and discussions.",
     inputSchema={
         "type": "object",
         "required": ["action"],

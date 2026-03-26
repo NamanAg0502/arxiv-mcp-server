@@ -13,13 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 pwc_search_tool = types.Tool(
     name="benchmarks",
-    description="""Search Papers With Code for papers with open-source implementations and benchmark results. Uniquely connects papers to runnable GitHub repos, SOTA benchmark rankings, methods, and datasets.
-
-Use when: user wants code for a paper, wants to find implementations, wants SOTA benchmark tables, or wants to know which frameworks/repos exist for a technique.
-
-Paper IDs are URL slugs (e.g., "attention-is-all-you-need"). You can search by title, topic, or arXiv ID.
-
-Examples: query="attention is all you need" | query="diffusion models" include_benchmarks=true | query="2401.12345" include_repos=true""",
+    description="Search Papers With Code for SOTA benchmarks, code repositories, and methods.",
     inputSchema={
         "type": "object",
         "properties": {

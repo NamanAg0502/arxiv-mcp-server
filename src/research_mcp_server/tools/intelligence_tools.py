@@ -23,13 +23,7 @@ logger = logging.getLogger("research-mcp-server")
 
 tech_pulse_tool = types.Tool(
     name="tech_pulse",
-    description=(
-        "Get a unified view of what's trending in tech right now. "
-        "Aggregates trending content from Hacker News, Reddit dev communities, "
-        "GitHub trending repos, Dev.to articles, and HuggingFace papers.\n\n"
-        "Use when: 'What are developers talking about this week?', "
-        "'What's hot in AI/ML?', 'Any interesting new tools?'"
-    ),
+    description="What's trending in tech? Aggregates HN, GitHub, Dev.to, and HuggingFace in parallel.",
     inputSchema={
         "type": "object",
         "properties": {
@@ -122,13 +116,7 @@ async def handle_tech_pulse(arguments: Dict[str, Any]) -> List[types.TextContent
 
 evaluate_tool = types.Tool(
     name="evaluate",
-    description=(
-        "Compare technologies, tools, or frameworks with evidence from multiple sources. "
-        "Pulls GitHub repo stats, package registry data, Reddit discussions, and HN threads "
-        "to build a decision matrix.\n\n"
-        "Use when: 'Drizzle vs Prisma?', 'Should we use Bun or pnpm?', "
-        "'FastAPI vs Litestar for our API?'"
-    ),
+    description="Compare technologies with evidence — GitHub stats, Reddit discussions, HN threads, package data.",
     inputSchema={
         "type": "object",
         "required": ["items"],
@@ -238,13 +226,7 @@ async def handle_evaluate(arguments: Dict[str, Any]) -> List[types.TextContent]:
 
 sentiment_tool = types.Tool(
     name="sentiment",
-    description=(
-        "Analyze community sentiment about a technology, tool, or topic. "
-        "Gathers discussions from Reddit and Hacker News, then summarizes "
-        "the overall sentiment with key praise, concerns, and representative quotes.\n\n"
-        "Use when: 'What do devs think about Bun?', 'Is LangChain liked or hated?', "
-        "'Community opinion on Tailwind v4?'"
-    ),
+    description="What does the dev community think about a technology? Gathers and analyzes Reddit + HN discussions.",
     inputSchema={
         "type": "object",
         "required": ["topic"],
@@ -377,13 +359,7 @@ async def handle_sentiment(arguments: Dict[str, Any]) -> List[types.TextContent]
 
 deep_research_tool = types.Tool(
     name="deep_research",
-    description=(
-        "Comprehensive research on a topic combining academic papers AND practitioner "
-        "perspectives. Queries arXiv, GitHub, HN, Reddit, Dev.to, and package registries "
-        "to build a complete picture.\n\n"
-        "Use when: 'Everything about WebTransport', 'Full picture on vector databases', "
-        "'Research report on RLHF techniques'"
-    ),
+    description="Comprehensive multi-source research — arXiv papers + GitHub + HN + Reddit + Dev.to + packages.",
     inputSchema={
         "type": "object",
         "required": ["topic"],
