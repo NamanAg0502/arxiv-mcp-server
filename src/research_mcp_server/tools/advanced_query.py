@@ -163,7 +163,7 @@ async def handle_advanced_query(
         )
 
         response_data = {
-            "total_results": len(results),
+            "total": len(results),
             "papers": results,
         }
 

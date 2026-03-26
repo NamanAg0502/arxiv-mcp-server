@@ -118,7 +118,7 @@ async def handle_hf_trending(arguments: Dict[str, Any]) -> List[types.TextConten
             "source": "huggingface",
             "query": query,
             "date": date,
-            "total_results": len(papers),
+            "total": len(papers),
             "papers": papers,
         }
 

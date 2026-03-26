@@ -396,7 +396,7 @@ async def handle_multi_search(arguments: Dict[str, Any]) -> List[types.TextConte
             "sources_searched": list(source_counts.keys()),
             "results_per_source": source_counts,
             "total_before_dedup": sum(source_counts.values()),
-            "total_results": len(sorted_papers),
+            "total": len(sorted_papers),
             "papers": sorted_papers,
         }
 

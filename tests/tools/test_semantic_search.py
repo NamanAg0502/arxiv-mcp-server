@@ -78,7 +78,7 @@ async def test_semantic_search_with_model():
 
     assert len(result) == 1
     content = json.loads(result[0].text)
-    assert content["total_results"] <= 2
+    assert content["total"] <= 2
     assert content["model"] == "BAAI/bge-small-en-v1.5"
     assert len(content["papers"]) > 0
     # Each paper should have a semantic_similarity score
@@ -110,7 +110,7 @@ async def test_semantic_search_fallback():
     content = json.loads(result[0].text)
     assert "note" in content
     assert "Embedding model could not be loaded" in content["note"]
-    assert content["total_results"] == 2
+    assert content["total"] == 2
     assert len(content["papers"]) == 2
 
 
@@ -127,6 +127,6 @@ async def test_semantic_search_no_results():
         )
 
     content = json.loads(result[0].text)
-    assert content["total_results"] == 0
+    assert content["total"] == 0
     assert content["papers"] == []
     assert "No papers found" in content["note"]
