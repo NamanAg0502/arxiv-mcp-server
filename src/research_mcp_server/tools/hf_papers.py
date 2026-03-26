@@ -13,11 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 hf_trending_tool = types.Tool(
     name="hf_trending",
-    description="""Get trending AI papers from Hugging Face, or search papers by keyword. Optionally fetch linked HF models and datasets for each paper.
-
-Use without query to see today's trending papers ranked by community upvotes. Use with query to search HF papers. Use date parameter to browse a specific day's trending papers.
-
-Examples: {} (today's trending) | {"query": "vision transformers"} | {"date": "2026-03-25", "include_models": true}""",
+    description="Get trending ML papers, models, and datasets from HuggingFace.",
     inputSchema={
         "type": "object",
         "properties": {

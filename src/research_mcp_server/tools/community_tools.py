@@ -14,14 +14,7 @@ logger = logging.getLogger("research-mcp-server")
 
 community_tool = types.Tool(
     name="community",
-    description=(
-        "Search and browse developer community content from Dev.to and Lobsters. "
-        "Higher signal-to-noise than social media for technical content.\n"
-        "Actions:\n"
-        "- 'search': Search Dev.to articles by keyword/tag.\n"
-        "- 'trending': Get trending articles from Dev.to, Lobsters, or both.\n"
-        "- 'by_tag': Get Lobsters stories by tag (ai, python, rust, etc.)."
-    ),
+    description="Search Dev.to articles and Lobsters stories. Actions: search, trending, by_tag.",
     inputSchema={
         "type": "object",
         "required": ["action"],

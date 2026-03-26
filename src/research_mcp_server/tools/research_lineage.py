@@ -15,21 +15,7 @@ logger = logging.getLogger("research-mcp-server")
 
 research_lineage_tool = types.Tool(
     name="lineage",
-    description="""Build a directed acyclic graph (DAG) of intellectual influence around an arXiv paper.
-
-Traces the lineage of ideas both backward (what the paper builds on) and forward
-(what it influenced), identifying:
-- **Foundations**: papers cited by 3+ of the root's references (shared intellectual roots)
-- **Methodological ancestors**: highest-cited references (established methods the root builds on)
-- **Key descendants**: citing papers with highest own citation counts (most impactful follow-up work)
-- **Research threads**: groups of descendants clustered by shared title keywords
-
-Returns a full DAG (nodes + edges) plus categorized analysis.
-
-EXAMPLES:
-- Full lineage: paper_id="2401.12345"
-- Ancestors only, deeper: paper_id="2401.12345", direction="ancestors", depth=3
-- Broad descendant scan: paper_id="2401.12345", direction="descendants", max_per_level=30""",
+    description="Build an intellectual influence DAG — trace ancestors, descendants, and research threads for a paper.",
     inputSchema={
         "type": "object",
         "properties": {

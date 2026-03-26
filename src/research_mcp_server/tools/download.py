@@ -36,7 +36,7 @@ class ConversionStatus:
 
 download_tool = types.Tool(
     name="download_paper",
-    description="Download an arXiv paper by ID, convert its PDF to markdown, and store it locally. Required before using read_paper. Conversion runs asynchronously -- use check_status=true to poll progress. Returns immediately if paper was already downloaded. Example: paper_id=\"2401.12345\"",
+    description="Download an arXiv paper PDF and convert to markdown for reading.",
     inputSchema={
         "type": "object",
         "properties": {

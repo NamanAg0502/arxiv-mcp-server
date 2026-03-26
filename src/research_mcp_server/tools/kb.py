@@ -16,15 +16,7 @@ logger = logging.getLogger("research-mcp-server")
 
 kb_tool = types.Tool(
     name="kb",
-    description=(
-        "Unified knowledge base for managing your saved research papers. "
-        "Choose an action:\n"
-        "- 'save': Save a paper (from arXiv, DOI, or manual entry) with optional tags, notes, and collection.\n"
-        "- 'search': Semantic/keyword/hybrid search across saved papers. Fully local, no API calls.\n"
-        "- 'list': Browse saved papers with filters, sorting, pagination, and stats.\n"
-        "- 'annotate': Update tags, notes, reading status, or collection membership on a saved paper.\n"
-        "- 'remove': Permanently delete a paper (preview first with confirm=false)."
-    ),
+    description="Manage your local paper knowledge base. Actions: save, search, list, annotate, remove.",
     inputSchema={
         "type": "object",
         "properties": {

@@ -49,14 +49,7 @@ ALL_ACTIONS = sorted(SESSION_ACTIONS | MEMORY_ACTIONS)
 
 memory_tool = types.Tool(
     name="memory",
-    description=(
-        "Persistent research memory and session tracking. Combines "
-        "session-scoped context (papers, questions, findings) with "
-        "cross-session persistent memory (theses, digests, warm context). "
-        "Use 'warm_context' at the start of research to load accumulated "
-        "knowledge. Use session actions to track current work. Use "
-        "thesis/digest actions for cross-session persistence."
-    ),
+    description="Track research sessions and persistent memory. Actions: create, status, log_paper, add_thesis, warm_context, and more.",
     inputSchema={
         "type": "object",
         "required": ["action"],

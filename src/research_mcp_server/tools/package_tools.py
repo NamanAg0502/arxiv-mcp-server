@@ -13,14 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 packages_tool = types.Tool(
     name="packages",
-    description=(
-        "Get package stats, compare packages, and search registries. "
-        "Covers npm, PyPI, and crates.io.\n"
-        "Actions:\n"
-        "- 'stats': Get detailed info for a package (version, downloads, license, repo).\n"
-        "- 'compare': Compare 2+ packages side-by-side (same or different registries).\n"
-        "- 'search': Search for packages by keyword."
-    ),
+    description="Get package stats from npm, PyPI, and crates.io. Actions: stats, compare, search.",
     inputSchema={
         "type": "object",
         "required": ["action"],

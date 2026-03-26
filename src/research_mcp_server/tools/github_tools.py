@@ -13,16 +13,7 @@ logger = logging.getLogger("research-mcp-server")
 
 github_tool = types.Tool(
     name="github",
-    description=(
-        "Search and analyze GitHub repositories. Understand OSS adoption, compare tools, "
-        "track releases. Optional GITHUB_TOKEN env var for higher rate limits.\n"
-        "Actions:\n"
-        "- 'search': Search repos by keyword, topic, or language. Sorted by stars.\n"
-        "- 'repo': Get detailed info for a specific repo (stars, forks, contributors, activity).\n"
-        "- 'compare': Compare 2+ repos side-by-side.\n"
-        "- 'trending': Get trending repos (recently created, high stars).\n"
-        "- 'releases': Get recent releases for a repo."
-    ),
+    description="Search GitHub repos, get stats, compare projects, check trending and releases.",
     inputSchema={
         "type": "object",
         "required": ["action"],

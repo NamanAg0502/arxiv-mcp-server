@@ -164,12 +164,7 @@ def _ensure_index() -> ToolIndex:
 
 suggest_tools_tool = types.Tool(
     name="help",
-    description=(
-        "Recommend the most relevant tools for a natural-language research query. "
-        "Uses semantic embeddings to match your intent against all available tool "
-        "descriptions, so you can discover the right tool without reading every schema. "
-        "Returns ranked suggestions with similarity scores and an estimate of token savings."
-    ),
+    description="Find the right tool for your task. Describe what you need in natural language.",
     inputSchema={
         "type": "object",
         "properties": {

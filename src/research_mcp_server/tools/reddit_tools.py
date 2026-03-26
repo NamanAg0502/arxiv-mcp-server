@@ -12,15 +12,7 @@ logger = logging.getLogger("research-mcp-server")
 
 reddit_tool = types.Tool(
     name="reddit",
-    description=(
-        "Search and browse Reddit developer communities. Great for practitioner sentiment, "
-        "tool recommendations, and honest discussions. Works without auth (public JSON) or "
-        "with REDDIT_CLIENT_ID + REDDIT_CLIENT_SECRET for better rate limits.\n"
-        "Actions:\n"
-        "- 'search': Search posts across dev subreddits or a specific subreddit.\n"
-        "- 'trending': Get hot/top posts from curated dev subreddits.\n"
-        "- 'discussion': Get a post's top comments for sentiment/opinions."
-    ),
+    description="Search Reddit dev communities, get trending posts, and read discussion threads.",
     inputSchema={
         "type": "object",
         "required": ["action"],
