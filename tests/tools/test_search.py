@@ -19,7 +19,7 @@ async def test_basic_search(mock_client):
 
         assert len(result) == 1
         content = json.loads(result[0].text)
-        assert content["total_results"] == 1
+        assert content["total"] == 1
         paper = content["papers"][0]
         assert paper["id"] == "2103.12345"
         assert paper["title"] == "Test Paper"
@@ -75,7 +75,7 @@ async def test_search_with_dates():
         )
 
         content = json.loads(result[0].text)
-        assert content["total_results"] == 1
+        assert content["total"] == 1
         assert len(content["papers"]) == 1
 
 

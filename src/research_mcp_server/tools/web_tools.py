@@ -37,15 +37,41 @@ web_tool = types.Tool(
 )
 
 
+# Block internal/private network URLs
+_BLOCKED_HOSTS = {
+    "localhost", "127.0.0.1", "0.0.0.0", "::1",
+    "metadata.google.internal", "169.254.169.254",  # Cloud metadata
+}
+
+
+def _validate_url(url: str) -> str | None:
+    """Validate and sanitize URL. Returns error message if invalid, None if OK."""
+    from urllib.parse import urlparse
+
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        return f"Invalid scheme '{parsed.scheme}'. Only http/https allowed."
+    if parsed.hostname and parsed.hostname.lower() in _BLOCKED_HOSTS:
+        return f"Blocked host: {parsed.hostname}. Cannot access internal/private networks."
+    if parsed.hostname and (parsed.hostname.endswith(".local") or parsed.hostname.startswith("192.168.")):
+        return f"Blocked host: {parsed.hostname}. Cannot access private networks."
+    return None
+
+
 async def handle_web(arguments: Dict[str, Any]) -> List[types.TextContent]:
     """Fetch and extract web content."""
     url = arguments.get("url")
     if not url:
         return [types.TextContent(type="text", text="Error: 'url' is required.")]
 
-    # Basic URL validation
+    # Prepend https if missing
     if not url.startswith(("http://", "https://")):
         url = f"https://{url}"
+
+    # Security: validate URL
+    error = _validate_url(url)
+    if error:
+        return [types.TextContent(type="text", text=f"Error: {error}")]
 
     client = WebClient()
     extract = arguments.get("extract", "article")

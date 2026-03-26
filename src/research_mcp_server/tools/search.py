@@ -431,7 +431,7 @@ async def handle_search(arguments: Dict[str, Any]) -> List[types.TextContent]:
             )
 
             response_data = {
-                "total_results": len(results),
+                "total": len(results),
                 "papers": results,
             }
 
@@ -480,7 +480,7 @@ async def handle_search(arguments: Dict[str, Any]) -> List[types.TextContent]:
                 logger.info(
                     f"Raw API search completed: {len(results)} results returned"
                 )
-                response_data = {"total_results": len(results), "papers": results}
+                response_data = {"total": len(results), "papers": results}
 
                 return [
                     types.TextContent(
@@ -551,7 +551,7 @@ async def handle_search(arguments: Dict[str, Any]) -> List[types.TextContent]:
             results.append(_process_paper(paper))
 
         logger.info(f"Search completed: {len(results)} results returned")
-        response_data = {"total_results": len(results), "papers": results}
+        response_data = {"total": len(results), "papers": results}
 
         return [
             types.TextContent(type="text", text=json.dumps(response_data, indent=2))

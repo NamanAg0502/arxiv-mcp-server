@@ -67,7 +67,7 @@ async def handle_pwc_search(
                     text=json.dumps(
                         {
                             "query": query,
-                            "total_results": 0,
+                            "total": 0,
                             "papers": [],
                             "suggestion": (
                                 "No results found. Try broader search terms, "
@@ -114,7 +114,7 @@ async def handle_pwc_search(
 
         response = {
             "query": query,
-            "total_results": len(enriched_papers),
+            "total": len(enriched_papers),
             "papers": enriched_papers,
         }
 

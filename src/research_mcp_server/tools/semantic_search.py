@@ -214,7 +214,7 @@ async def handle_semantic_search(
                     type="text",
                     text=json.dumps(
                         {
-                            "total_results": 0,
+                            "total": 0,
                             "papers": [],
                             "note": "No papers found matching the query.",
                         },
@@ -231,7 +231,7 @@ async def handle_semantic_search(
             logger.warning("Embedding model unavailable, falling back to keyword search")
             fallback_papers = pool[:max_results]
             response = {
-                "total_results": len(fallback_papers),
+                "total": len(fallback_papers),
                 "papers": fallback_papers,
                 "note": (
                     "Embedding model could not be loaded. Results are ranked by "
@@ -328,7 +328,7 @@ async def handle_semantic_search(
             ranked_papers.append(paper)
 
         response = {
-            "total_results": len(ranked_papers),
+            "total": len(ranked_papers),
             "search_pool_size": len(pool),
             "model": MODEL_NAME,
             "papers": ranked_papers,

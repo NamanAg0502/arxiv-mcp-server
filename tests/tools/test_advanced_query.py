@@ -31,7 +31,7 @@ async def test_advanced_query_by_title():
 
         assert len(result) == 1
         content = json.loads(result[0].text)
-        assert content["total_results"] == 1
+        assert content["total"] == 1
         assert content["papers"][0]["title"] == "Test Paper on Transformers"
         assert content["papers"][0]["id"] == "2401.12345"
 
@@ -70,7 +70,7 @@ async def test_advanced_query_combined_fields():
         )
 
         content = json.loads(result[0].text)
-        assert content["total_results"] == 1
+        assert content["total"] == 1
         assert content["papers"][0]["authors"] == ["Vaswani"]
 
         call_kwargs = mock_search.call_args
