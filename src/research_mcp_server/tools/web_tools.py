@@ -12,7 +12,12 @@ logger = logging.getLogger("research-mcp-server")
 
 web_tool = types.Tool(
     name="web",
-    description="Fetch and extract content from any URL — articles, links, or metadata.",
+    description=(
+        "Fetch and extract content from any URL. Use when you find a blog post, "
+        "documentation page, or article link in search results (HN, Reddit, GitHub README) "
+        "and need to read the actual content. Also useful for fetching library docs, "
+        "release notes, or technical announcements. Returns extracted text from HTML."
+    ),
     inputSchema={
         "type": "object",
         "required": ["url"],

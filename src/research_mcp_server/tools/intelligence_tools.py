@@ -152,11 +152,12 @@ evaluate_tool = types.Tool(
 
 
 async def handle_evaluate(arguments: Dict[str, Any]) -> List[types.TextContent]:
-    """Compare technologies using multiple data sources."""
+    """Compare technologies using multiple data sources including live docs."""
     from .github_tools import handle_github
     from .reddit_tools import handle_reddit
     from .hn_tools import handle_hn
     from .package_tools import handle_packages
+    from .context7_tools import handle_context7
 
     items = arguments["items"]
     results: Dict[str, Any] = {"items": items}
@@ -214,6 +215,17 @@ async def handle_evaluate(arguments: Dict[str, Any]) -> List[types.TextContent]:
     }))
     if hn_data:
         results["hn_discussions"] = hn_data
+
+    # 6. Context7 live docs — fetch documentation for each technology
+    docs_results = []
+    for item in items:
+        doc_data = await safe_call(f"docs:{item}", handle_context7({
+            "action": "lookup", "library": item, "query": "getting started features overview",
+        }))
+        if doc_data and doc_data.get("content"):
+            docs_results.append({"item": item, "docs": doc_data})
+    if docs_results:
+        results["live_documentation"] = docs_results
 
     if errors:
         results["errors"] = errors
@@ -401,13 +413,14 @@ def _simplify_query(topic: str, max_words: int = 5) -> str:
 
 
 async def handle_deep_research(arguments: Dict[str, Any]) -> List[types.TextContent]:
-    """Comprehensive multi-source research."""
+    """Comprehensive multi-source research including live docs and web content."""
     from .search import handle_search
     from .github_tools import handle_github
     from .hn_tools import handle_hn
     from .reddit_tools import handle_reddit
     from .community_tools import handle_community
     from .package_tools import handle_packages
+    from .context7_tools import handle_context7
 
     topic = arguments["topic"]
     short_query = _simplify_query(topic)  # Simplified for APIs that choke on long queries
@@ -442,6 +455,10 @@ async def handle_deep_research(arguments: Dict[str, Any]) -> List[types.TextCont
         })),
         "community": safe_call("community", handle_community({
             "action": "search", "query": short_query, "max_results": max_per,
+        })),
+        # Context7: look for library/framework docs related to the topic
+        "documentation": safe_call("context7", handle_context7({
+            "action": "lookup", "library": short_query, "query": topic,
         })),
     }
 
